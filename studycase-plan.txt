@@ -33,3 +33,28 @@ Tujuan Projek: Penerapan ke-1 OOPHP dalam Projek lama (Latihan PHP Dasar1)
     2. Hapus
     3. Edit
 8. Semua dikerjakan dengan mengusahakan dengan Objek Oriented Programming
+
+
+implementasi OOPHP
+1. Database
+    a. koneksi
+    b. select
+    c. insert
+    d. delete
+    e. update
+    f. fetch
+
+    Plan
+    a. Create class Database
+    b. tambah properti
+        1. namaHost
+        2. username
+        3. password 
+        4. namaDatabase
+        5. string_query
+    c. tambah Method
+        1. select
+        2. insert
+        3. delete
+        4. update
+        5. fetch
