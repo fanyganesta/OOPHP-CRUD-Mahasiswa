@@ -1,0 +1,17 @@
+body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.ct {
+    text-align:center;
+}
+
+.message{
+    font-style:italic;
+    color:green;
+}
+
+.error{
+    font-style:italic;
+    color:red;
+}

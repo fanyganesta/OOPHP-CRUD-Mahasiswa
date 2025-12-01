@@ -14,11 +14,7 @@ Tujuan Projek: Penerapan ke-1 OOPHP dalam Projek lama (Latihan PHP Dasar1)
         2. Email
         3. Nomor Telepon
         4. Password
-    c. Data User/Guest
-        1. Nama
-        2. Email
-        3. Nomor Telepon
-        4. Password
+        5. Role (Guest/Admin)
 2. Satu halaman login untuk semua User
 3. Index html terdapat fitur
     1. Tambah Data
