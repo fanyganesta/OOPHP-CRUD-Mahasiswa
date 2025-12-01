@@ -1,0 +1,39 @@
+Tujuan Projek: Penerapan ke-1 OOPHP dalam Projek lama (Latihan PHP Dasar1)
+1. Database 
+    a. Data Mahasiswa
+        1. ID
+        2. Nama
+        3. NIM
+        4. Tanggal Lahir
+        5. Alamat
+        6. Foto
+        7. Email
+        8. Nomor Telepon
+    b. Data Admin
+        1. Nama
+        2. Email
+        3. Nomor Telepon
+        4. Password
+    c. Data User/Guest
+        1. Nama
+        2. Email
+        3. Nomor Telepon
+        4. Password
+2. Satu halaman login untuk semua User
+3. Index html terdapat fitur
+    1. Tambah Data
+    2. Hapus Data
+    3. Edit Data
+    4. Tampil Data
+    5. Cari Data
+    6. Paginasi
+
+    Tambahan Lain:
+    1. User guest tidak terdapat kolom action
+4. Fitur login dengan Rememberme
+6. Registrasi user baru
+7. Management user
+    1. Tambah
+    2. Hapus
+    3. Edit
+8. Semua dikerjakan dengan mengusahakan dengan Objek Oriented Programming
