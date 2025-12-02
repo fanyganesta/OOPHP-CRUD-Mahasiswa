@@ -23,11 +23,11 @@
         }
 
         $insertMahasiswa = "INSERT INTO mahasiswa VALUES 
-            ('', 'Mahasiswa1', '2000-10-01', 'Malang, jawa timur', '19010101', 'mahasiswa1@gmail.com', '08111111111', '' ),
-            ('', 'Mahasiswa2', '2000-10-02', 'Pujon, jawa timur', '19010102', 'mahasiswa2@gmail.com', '08222222222', ''),
-            ('', 'Mahasiswa3', '2000-10-03', 'Dampit, jawa timur', '19010103', 'mahasiswa3@gmail.com', '08333333333', ''),
-            ('', 'Mahasiswa4', '2000-10-04', 'Turen, jawa timur', '19010104', 'mahasiswa4@gmail.com', '08444444444', ''),
-            ('', 'Mahasiswa5', '2000-10-05', 'Donomulyo, jawa timur', '19010104', 'mahasiswa5@gmail.com', '08555555555', '')
+            ('', 'Mahasiswa1', '2000-10-01', 'Malang, jawa timur', '19010101', 'mahasiswa1@gmail.com', 08111111111, '' ),
+            ('', 'Mahasiswa2', '2000-10-02', 'Pujon, jawa timur', '19010102', 'mahasiswa2@gmail.com', 08222222222, ''),
+            ('', 'Mahasiswa3', '2000-10-03', 'Dampit, jawa timur', '19010103', 'mahasiswa3@gmail.com', 08333333333, ''),
+            ('', 'Mahasiswa4', '2000-10-04', 'Turen, jawa timur', '19010104', 'mahasiswa4@gmail.com', 08444444444, ''),
+            ('', 'Mahasiswa5', '2000-10-05', 'Donomulyo, jawa timur', '19010104', 'mahasiswa5@gmail.com', 08555555555, '')
             ";
         $result = mysqli_query($db, $insertMahasiswa);
         redirectLogin($result);
