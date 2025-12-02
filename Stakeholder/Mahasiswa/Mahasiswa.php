@@ -43,5 +43,27 @@
             $result = $db->insert($this->table, $columns, $param, $paramType, $datas);
             return $result;
         }
+
+        public function update($data){
+            $db = new Database();
+            $ID = "?";
+            $datas = "nama = ?, 
+                    tanggalLahir = ?,
+                    alamat = ?,
+                    nim = ?,
+                    email = ?,
+                    telepon = ?,
+                    foto = ?
+            ";
+            if($_FILES['image']['error'] == 4){
+                $foto = $data['oldImg'];
+            }elseif($_FILE['image']['error'] == 4 && $data['foto'] == ''){
+                $foto = null;
+            }
+            $paramType = "sdssssss";
+            $param = "'{$data['nama']}', '{$data['tanggalLahir']}', '{$data['alamat']}', '{$data['nim']}', '{$data['email']}', '{$data['telepon']}', '$foto', '{$data['ID']}'";
+            $result = $db->update($this->table, $datas, $ID, $paramType, $param);
+            return $result;
+        }
  
     }

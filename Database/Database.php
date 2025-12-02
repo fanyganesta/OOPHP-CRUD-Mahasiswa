@@ -34,10 +34,8 @@
             $str = "SELECT * FROM $table WHERE ID = $ID";
             $db = $this->db;
             $prepQuery = $db->prepare($str);
-            if(!$prepQuery){
-                header("Location: login.php?error=Gagal ambil data, periksa sintaks!");
-                exit;
-            }
+            (!$prepQuery) && $this->failedPrepare();
+            
             $prepQuery->execute();
             $result = $prepQuery->get_result();
             return $result->fetch_assoc();
@@ -50,5 +48,23 @@
             $result = $prepQuery->execute();
             return $result; 
         }
+
+        public function update($table, $columns, $ID, $paramType, $param){
+            // var_dump($columns);die;
+            $str = "UPDATE $table SET $columns WHERE ID = $ID";
+            $prepQuery = $this->db->prepare($str);
+            (!$prepQuery) && $this->failedPrepare();
+            $prepQuery->bind_param("$paramType", $param);
+            $result = $prepQuery->execute();
+            return $result;
+        }
+
+
+        protected function failedPrepare(){
+            header("Location: login.php?error=Gagal ambil data, periksa sintaks!");
+            exit;
+        }
+
+
 
     }

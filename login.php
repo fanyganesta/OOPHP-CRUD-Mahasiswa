@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="css-index.css">
+    <link rel="stylesheet" href="Components/css-index.css">
 </head>
 <body> 
 
-    <?php require 'infoFeedback.php'?>
+    <?php require 'Components/infoFeedback.php'?>
     <h3> Selamat datang, silahkan login</h3>
 
     <a href="register.php">Daftar Masuk</a>

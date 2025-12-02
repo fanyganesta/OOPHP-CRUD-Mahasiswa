@@ -22,10 +22,10 @@
 <html>
 <head>
     <title>Tambah Data</title>
-    <link rel="stylesheet" href="css-index.css">
+    <link rel="stylesheet" href="Components/css-index.css">
 </head>
 <body>
-    <?php require 'infoFeedback.php'?>
+    <?php require 'Components/infoFeedback.php'?>
     <h3> Tambah Data Mahasiswa </h3>
     <a href="index.php">Kembali ke beranda</a>
     <br>
