@@ -41,7 +41,13 @@
         <?php $i = 1; foreach($rows as $row) : ?>
             <tr>
                 <td class="ct"><?= $i ?></td>
-                <td class="ct"><?= $row['foto']?></td>
+                <td class="ct">
+                    <?php if($row['foto'] == null) : ?>
+                        <p><i> (Belum upload foto) </i></p>
+                    <?php else : ?>
+                        <img src="Assets/img/<?=$row['foto']?>" alt="Foto Pengguna" width="150">
+                    <?php endif ?>
+                </td>
                 <td class="ct"><?= $row['nama']?></td>
                 <td class="ct"><?= $row['nim']?></td>
                 <td class="ct"><?= $row['email']?></td>

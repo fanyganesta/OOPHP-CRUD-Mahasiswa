@@ -4,7 +4,7 @@
     if(isset($_POST['btn-tambah'])){
         // var_dump($_POST['tanggalLahir']);die;
         $mahasiswa = new Mahasiswa();
-        $result = $mahasiswa->insert($_POST);
+        $result = $mahasiswa->insert($_POST, $_FILES);
         if(!$result){
             header("Location: index.php?error=Gagal tambah data, periksa sintaks!");
             exit;
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css-index.css">
 </head>
 <body>
+    <?php require 'infoFeedback.php'?>
     <h3> Tambah Data Mahasiswa </h3>
     <a href="index.php">Kembali ke beranda</a>
     <br>
@@ -57,7 +58,7 @@
             </tr>
             <tr>
                 <td><label for="image">Upload Foto</label></td>
-                <td>: <input type="file" id="image" name="image"></td>
+                <td>: <input type="file" id="image" name="image" required></td>
             </tr>
             <tr> 
                 <td class="ct" colspan="2">

@@ -23,22 +23,18 @@
             return $rows;
         }
 
-        public function insert($data){
+        public function insert($data, $files){
             $nama = $data['nama'];
             $tanggalLahir = $data['tanggalLahir'];
             $alamat = $data['alamat'];
             $nim = $data['nim'];
             $email = $data['email'];
             $telepon = $data['telepon'];
-            $foto = $data['foto'];
+            $foto = $this->fileProcessing($files['image']);
 
             $columns = "nama, tanggalLahir, alamat, nim, email, telepon, foto";
             $param = "?,?,?,?,?,?,?";
             $paramType = "sssssss";
-
-            if($foto == ''){
-                $foto = NULL;
-            }
             
             $datas = [$nama, $tanggalLahir, $alamat, $nim, $email, $telepon, $foto];
 
@@ -47,4 +43,5 @@
             $result = $db->insert($this->table, $columns, $param, $paramType, $datas);
             return $result;
         }
+ 
     }
