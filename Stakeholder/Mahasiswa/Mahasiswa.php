@@ -23,11 +23,18 @@
             return $rows;
         }
 
-        public function insert($nama, $tanggalLahir, $alamat, $nim, $email, $telepon, $foto){
+        public function insert($data){
+            $nama = $data['nama'];
+            $tanggalLahir = $data['tanggalLahir'];
+            $alamat = $data['alamat'];
+            $nim = $data['nim'];
+            $email = $data['email'];
+            $telepon = $data['telepon'];
+            $foto = $data['foto'];
 
             $columns = "nama, tanggalLahir, alamat, nim, email, telepon, foto";
             $param = "?,?,?,?,?,?,?";
-            $paramType = "sdsssss";
+            $paramType = "sssssss";
 
             if($foto == ''){
                 $foto = NULL;

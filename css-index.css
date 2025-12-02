@@ -1,5 +1,5 @@
 body {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .ct {
@@ -14,4 +14,18 @@ body {
 .error{
     font-style:italic;
     color:red;
+}
+
+/* tambahkan ini */
+.br {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.br, table.br th, table.br td {
+    border: 1px solid black;
+}
+
+.br th, table.br td {
+    padding: 8px;
 }

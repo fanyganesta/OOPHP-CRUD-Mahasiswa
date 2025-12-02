@@ -10,11 +10,7 @@
 </head>
 <body> 
 
-    <?php if(isset($_GET['error'])): ?>
-        <p class="error"> <?= $_GET['error'] ?></p>
-    <?php elseif(isset($_GET['message'])): ?>
-        <p class="message"> <?= $_GET['message']?> </p>
-    <?php endif ?>
+    <?php require 'infoFeedback.php'?>
     <h3> Selamat datang, silahkan login</h3>
 
     <a href="register.php">Daftar Masuk</a>
