@@ -42,14 +42,11 @@
 
         public function insert($table, $dbColumns, $param, $paramType, $datas){
             $str = "INSERT INTO $table ($dbColumns) VALUE ($param)";
-            $prepQuery = $this->db->prepare($str);
-            $prepQuery->bind_param("$paramType", ...$datas);
-            $result = $prepQuery->execute();
+            $result = $this->bindParam($str, $paramType, $datas);
             return $result; 
         }
 
         public function update($table, $columns, $ID, $paramType, $param){
-            // var_dump($columns);die;
             $str = "UPDATE $table SET $columns WHERE ID = $ID";
             $prepQuery = $this->db->prepare($str);
             (!$prepQuery) && $this->failedPrepare();
@@ -67,29 +64,56 @@
 
         public function delete($table, $ID){
             $str = "DELETE FROM $table WHERE ID = ?";
-            $prepQuery = $this->db->prepare($str);
-            (!$prepQuery) && $this->failedPrepare();
-            $prepQuery->bind_param('s', $ID);
-            $result = $prepQuery->execute();
+            $result = $this->bindParam($str, 's', [$ID]);
             return $result;
         }
 
 
         public function allWithPagination($table, $halamanAktif){
-            $this->limit = 10;
-            $this->index = 0;
-            $allData = $this->getAll($table);
-            $jumlahHalaman = ceil(count($allData)/$this->limit);
-            $getHalaman = $halamanAktif;
-            if($getHalaman < 1){
-                $halamanAktif = 1;
-            }else{
-                $halamanAktif = $getHalaman;
-            }
-
+            $halamanAktif = ($halamanAktif < 1) ? 1 : $halamanAktif;
             $index = $halamanAktif * $this->limit - $this->limit;
+            $allData = $this->getAll($table); //beda
+            $jumlahHalaman = ceil(count($allData)/$this->limit); //beda
+            $str = "SELECT * FROM $table LIMIT $index, $this->limit"; //beda
+            $result = $this->pagination($str, $halamanAktif, $jumlahHalaman);
+            return $result;
+        }
 
-            $str = "SELECT * FROM $table LIMIT $index, $this->limit";
+
+        public function cari($table, $columns, $paramType, $param, $halamanAktif){
+            $limit = $this->limit;
+            $halamanAktif = ($halamanAktif < 1) ? 1 : $halamanAktif;
+            $index = $halamanAktif * $this->limit - $limit;
+
+            $str = "SELECT * FROM $table WHERE 
+                $columns
+            ";
+
+            $result = $this->bindParam($str, $paramType, $param);
+            $result = $result->get_result();
+            $result = $this->fetchData($result);
+            $datasFind = count($result);
+            $jumlahHalaman = ceil($datasFind/$limit);
+            $str = $str."LIMIT $index, $limit";
+            $result = $this->bindParam($str, $paramType, $param);
+            $rows = $this->fetchData($result);
+            $result = [];
+            foreach($rows as $row){
+                $row += ['jumlahHalaman' => $jumlahHalaman, 'halamanAktif' => $halamanAktif];
+                $result[] = $row;
+            }
+            return $result;
+        }
+
+        public function fetchData($datas){
+            $rows = [];
+            while($result = $datas->fetch_assoc()){
+                $rows[] = $result;
+            }
+            return $rows;
+        }
+
+        public function pagination($str, $halamanAktif, $jumlahHalaman){
             $prepQuery = $this->db->prepare($str);
             (!$prepQuery) && $this->failedPrepare();
             $prepQuery->execute();
@@ -103,25 +127,11 @@
             return $result;
         }
 
-
-        public function cari($table, $columns, $paramType, $param){
-            $str = "SELECT * FROM $table WHERE 
-                $columns
-            ";
+        public function bindParam($str, $paramType, $param){
             $prepQuery = $this->db->prepare($str);
             (!$prepQuery) && $this->failedPrepare();
-            $prepQuery->bind_param($paramType, ...$param);
-            $prepQuery->execute();
-            $result = $prepQuery->get_result();
-            $rows = $this->fetchData($result);
-            return $rows;
-        }
-
-        public function fetchData($datas){
-            $rows = [];
-            while($result = $datas->fetch_assoc()){
-                $rows[] = $result;
-            }
-            return $rows;
+            $prepQuery->bind_param("$paramType", ...$param);
+            $result = $prepQuery->execute();
+            return $result;
         }
     }

@@ -22,7 +22,7 @@
     <p style="display: inline">|</p>
     <a href="logout.php">Keluar</a>
     <br> <br>
-    <?php require 'Components/cari.php';?>
+    <?php require 'Components/cari.php'?>
     <br>
     <table class="br">
         <?php if(count($rows) < 1) : ?>

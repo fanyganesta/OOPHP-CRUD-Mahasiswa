@@ -72,12 +72,13 @@
             return $this->db->allWithPagination($this->table, $halamanAktif);
         }
 
-        public function cari($data){
+        public function cari($data, $get){
             $columns = "nama LIKE ? || tanggalLahir LIKE ? || alamat LIKE ? || nim LIKE ? || email LIKE ? || telepon LIKE ? ";
             $paramType = 'ssssss';
             $data = "%$data%";
             $param = [$data, $data, $data, $data, $data, $data];
-            $result = $this->db->cari($this->table, $columns, $paramType, $param);
+            $halamanAktif = $get;
+            $result = $this->db->cari($this->table, $columns, $paramType, $param, $halamanAktif);
             return $result;
         }   
  
