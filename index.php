@@ -21,13 +21,8 @@
     <a href="tambah.php"> Tambah data</a>
     <p style="display: inline">|</p>
     <a href="logout.php">Keluar</a>
-
     <br> <br>
-    <form action="" method="POST">
-        <label for="cari">Cari Mahasiswa: </label>
-        <input id="cari" type="text" name="cari">
-        <button type="submit" name="btn-cari">Cari</button>
-    </form>
+    <?php require 'Components/cari.php';?>
     <br>
     <table class="br">
         <?php if(count($rows) < 1) : ?>

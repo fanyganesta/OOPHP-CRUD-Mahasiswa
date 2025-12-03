@@ -25,10 +25,7 @@
         public function getAll($table){
             $str = "SELECT * FROM $table";
             $query = mysqli_query($this->db, $str);
-            $rows = [];
-            while($result = $query->fetch_assoc()){
-                $rows[] = $result;
-            }
+            $rows = $this->fetchData($query);
             return $rows;
         }
 
@@ -97,11 +94,33 @@
             (!$prepQuery) && $this->failedPrepare();
             $prepQuery->execute();
             $result = $prepQuery->get_result();
-            $rows = [];
+            $rows = $this->fetchData($result);
+            $result = [];
+            foreach($rows as $row){
+                $row += ['jumlahHalaman' => $jumlahHalaman, 'halamanAktif' => $halamanAktif];
+                $result[] = $row;
+            }
+            return $result;
+        }
 
-            while($row = $result->fetch_assoc()){
-                $row += ['halamanAktif' => $halamanAktif, 'jumlahHalaman' => $jumlahHalaman];
-                $rows[] = $row;
+
+        public function cari($table, $columns, $paramType, $param){
+            $str = "SELECT * FROM $table WHERE 
+                $columns
+            ";
+            $prepQuery = $this->db->prepare($str);
+            (!$prepQuery) && $this->failedPrepare();
+            $prepQuery->bind_param($paramType, ...$param);
+            $prepQuery->execute();
+            $result = $prepQuery->get_result();
+            $rows = $this->fetchData($result);
+            return $rows;
+        }
+
+        public function fetchData($datas){
+            $rows = [];
+            while($result = $datas->fetch_assoc()){
+                $rows[] = $result;
             }
             return $rows;
         }
