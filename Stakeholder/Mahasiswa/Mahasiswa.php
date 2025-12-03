@@ -67,5 +67,9 @@
             $result = $this->db->delete($this->table, $ID);
             return $result;
         }
+
+        public function allWithPagination($halamanAktif){
+            return $this->db->allWithPagination($this->table, $halamanAktif);
+        }
  
     }

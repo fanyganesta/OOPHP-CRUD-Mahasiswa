@@ -8,7 +8,9 @@
                     $password = '', 
                     $database = 'oophp_mahasiswa', 
                     $stringQuery,
-                    $db;
+                    $db, 
+                    $limit = 10, 
+                    $index = 0;
 
         public function __CONSTRUCT(){
             $hostname = $this->hostname;
@@ -73,5 +75,34 @@
             $prepQuery->bind_param('s', $ID);
             $result = $prepQuery->execute();
             return $result;
+        }
+
+
+        public function allWithPagination($table, $halamanAktif){
+            $this->limit = 10;
+            $this->index = 0;
+            $allData = $this->getAll($table);
+            $jumlahHalaman = ceil(count($allData)/$this->limit);
+            $getHalaman = $halamanAktif;
+            if($getHalaman < 1){
+                $halamanAktif = 1;
+            }else{
+                $halamanAktif = $getHalaman;
+            }
+
+            $index = $halamanAktif * $this->limit - $this->limit;
+
+            $str = "SELECT * FROM $table LIMIT $index, $this->limit";
+            $prepQuery = $this->db->prepare($str);
+            (!$prepQuery) && $this->failedPrepare();
+            $prepQuery->execute();
+            $result = $prepQuery->get_result();
+            $rows = [];
+
+            while($row = $result->fetch_assoc()){
+                $row += ['halamanAktif' => $halamanAktif, 'jumlahHalaman' => $jumlahHalaman];
+                $rows[] = $row;
+            }
+            return $rows;
         }
     }
