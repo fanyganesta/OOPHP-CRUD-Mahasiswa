@@ -4,22 +4,19 @@
     use Database\Database;
 
     class Mahasiswa extends Stakeholder {
-        protected $jabatan = 'Mahasiswa', $email, $telepon, $table = 'mahasiswa' ;
+        protected $jabatan = 'Mahasiswa', $email, $telepon, $table = 'mahasiswa', $db;
 
-        // public function __CONSTRUCT($nama, $nim, $email, $telepon){
-        //     $jabatan = $this->jabatan;
-        //     parent::__CONSTRUCT($nama, $nim, $jabatan);
-        // }
+        public function __CONSTRUCT(){
+            $this->db = new Database();
+        }
 
         public function getAll(){
-            $db = new Database();
-            $rows = $db->getAll($this->table);
+            $rows = $this->db->getAll($this->table);
             return $rows;
         }
 
         public function getById($ID){
-            $db = new Database();
-            $rows = $db->getbyID($this->table, $ID);
+            $rows = $this->db->getbyID($this->table, $ID);
             return $rows;
         }
 
@@ -39,13 +36,11 @@
             $datas = [$nama, $tanggalLahir, $alamat, $nim, $email, $telepon, $foto];
 
 
-            $db = new Database();
-            $result = $db->insert($this->table, $columns, $param, $paramType, $datas);
+            $result = $this->db->insert($this->table, $columns, $param, $paramType, $datas);
             return $result;
         }
 
         public function update($data){
-            $db = new Database();
             $ID = "?";
             $datas = "nama = ?, 
                     tanggalLahir = ?,
@@ -56,13 +51,20 @@
                     foto = ?
             ";
             if($_FILES['image']['error'] == 4){
-                $foto = $data['oldImg'];
-            }elseif($_FILE['image']['error'] == 4 && $data['foto'] == ''){
+                $foto = $data['oldImage'];
+            }elseif($_FILES['image']['error'] == 4 && $data['oldImage'] == ''){
                 $foto = null;
+            }else{
+                $foto = $this->fileProcessing($_FILES['image']);
             }
-            $paramType = "sdssssss";
-            $param = "'{$data['nama']}', '{$data['tanggalLahir']}', '{$data['alamat']}', '{$data['nim']}', '{$data['email']}', '{$data['telepon']}', '$foto', '{$data['ID']}'";
-            $result = $db->update($this->table, $datas, $ID, $paramType, $param);
+            $paramType = "ssssssss";
+            $param = [$data['nama'], $data['tanggalLahir'], $data['alamat'],$data['nim'], $data['email'],$data['telepon'], $foto,$data['ID']];
+            $result = $this->db->update($this->table, $datas, $ID, $paramType, $param);
+            return $result;
+        }
+
+        public function delete($ID){
+            $result = $this->db->delete($this->table, $ID);
             return $result;
         }
  

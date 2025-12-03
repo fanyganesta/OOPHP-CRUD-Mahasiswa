@@ -54,7 +54,7 @@
             $str = "UPDATE $table SET $columns WHERE ID = $ID";
             $prepQuery = $this->db->prepare($str);
             (!$prepQuery) && $this->failedPrepare();
-            $prepQuery->bind_param("$paramType", $param);
+            $prepQuery->bind_param("$paramType", ...$param);
             $result = $prepQuery->execute();
             return $result;
         }
@@ -66,5 +66,12 @@
         }
 
 
-
+        public function delete($table, $ID){
+            $str = "DELETE FROM $table WHERE ID = ?";
+            $prepQuery = $this->db->prepare($str);
+            (!$prepQuery) && $this->failedPrepare();
+            $prepQuery->bind_param('s', $ID);
+            $result = $prepQuery->execute();
+            return $result;
+        }
     }
