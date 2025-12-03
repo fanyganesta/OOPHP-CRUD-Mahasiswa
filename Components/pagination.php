@@ -1,11 +1,3 @@
-<?php 
-
-    // if(isset($_POST['btn-cari'])){
-    //     echo "&cari="
-    // }
-
-?>
-
 <?php if($jumlahHalaman > 1) : ?>
     <tr>
         <td colspan="9" class="ct">
@@ -22,12 +14,12 @@
                 <?php if($j == $halamanAktif) : ?>
                     <p style="display:inline; font-size: 17px"><b><?=$j?></b></p>
                 <?php else : ?>
-                    <?php if($j < $halamanAktif+2 && $j > $halamanAktif - 2) :?>
+                    <?php if($j <= $halamanAktif+2 && $j > $halamanAktif - 2) :?>
                         <a href="?halaman=<?=$j?><?php echo (isset($_GET['cari'])) ? "&cari={$_GET['cari']}" : null?>"><?=$j?></a>
                     <?php endif ?>
                 <?php endif ?>
             <?php endfor ?>
-            <?php if($jumlahHalaman > 4 && $halamanAktif < $jumlahHalaman-1) :?>
+            <?php if($jumlahHalaman > 4 && $halamanAktif < $jumlahHalaman-2) :?>
                 <?php if($halamanAktif != $jumlahHalaman-2 ) : ?>
                     <p style="display:inline"> ... </p>
                 <?php endif ?>

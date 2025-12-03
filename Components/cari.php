@@ -3,6 +3,7 @@
     if(isset($_GET['cari'])) {
         $halamanAktif = (isset($_GET['halaman'])) ? $_GET['halaman'] : 1;
         $rows = $mahasiswa->cari($_GET['cari'], $halamanAktif);
+        $jumlahHalaman = $rows[0]['jumlahHalaman'];
     }
 
 ?>

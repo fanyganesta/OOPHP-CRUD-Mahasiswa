@@ -1,4 +1,5 @@
 <?php 
+    
     $db = mysqli_connect('localhost', 'root', '', 'oophp_mahasiswa');
 
     if($_GET['data'] == 'mahasiswa'){
@@ -17,7 +18,7 @@
             )";
             $result = mysqli_query($db, $tableMahasiswa);
             if(!$result){
-                header("Location: login.php?error=Gagal buat table. Periksa sintaks");
+                header("Location: ../login.php?error=Gagal buat table. Periksa sintaks");
                 exit;
             }
         }
@@ -45,7 +46,7 @@
             )";
             $result = mysqli_query($db, $createUsers);
             if(!$result){
-                header("Location: login.php?error=Gagal membuat table. Periksa sintaks");
+                header("Location: ../login.php?error=Gagal membuat table. Periksa sintaks");
                 exit;
             }
         }
@@ -63,10 +64,10 @@
 
     function redirectLogin($data){
         if(!$data){
-            header("Location: index.php?error=Gagal menambahkan data. Periksa sintaks");
+            header("Location: ../index.php?error=Gagal menambahkan data. Periksa sintaks");
             exit;
         }else{
-            header("Location: login.php?message=Berhasil menambahkan data!");
+            header("Location: ../login.php?message=Berhasil menambahkan data!");
             exit;
         }
     }
