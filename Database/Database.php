@@ -90,7 +90,6 @@
             ";
 
             $result = $this->bindParam($str, $paramType, $param);
-            $result = $result->get_result();
             $result = $this->fetchData($result);
             $datasFind = count($result);
             $jumlahHalaman = ceil($datasFind/$limit);
@@ -132,6 +131,8 @@
             (!$prepQuery) && $this->failedPrepare();
             $prepQuery->bind_param("$paramType", ...$param);
             $result = $prepQuery->execute();
+            $type = explode(' ', $str)[0];
+            ($type == 'SELECT') ? $result = $prepQuery->get_result() : null;
             return $result;
         }
     }
