@@ -1,4 +1,13 @@
 <?php
+/*
+    login berurusan dengan user
+    1. User memiliki data
+        a. nama
+        c. password
+        d. email
+        e. telepon
+        f. role
+*/
 
 ?>
 
