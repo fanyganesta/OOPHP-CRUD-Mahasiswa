@@ -1,5 +1,7 @@
 <?php 
     require 'autoload.php';
+    checkLogin();
+    
     use Stakeholder\Mahasiswa\Mahasiswa;
     if(isset($_POST['btn-tambah'])){
         // var_dump($_POST['tanggalLahir']);die;

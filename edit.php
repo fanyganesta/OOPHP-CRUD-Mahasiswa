@@ -1,5 +1,7 @@
 <?php
     require 'autoload.php';
+    checkLogin();
+    
     use Stakeholder\Mahasiswa\Mahasiswa;
     $mahasiswa = new Mahasiswa;
     $row = $mahasiswa->getById($_GET['ID']);

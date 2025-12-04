@@ -2,6 +2,7 @@
     require 'autoload.php';
     use Stakeholder\Mahasiswa\Mahasiswa;
 
+    checkLogin();
     $mahasiswa = new Mahasiswa;
     $result = $mahasiswa->delete($_GET['ID']);
     if(!$result){

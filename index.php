@@ -2,11 +2,12 @@
     require 'autoload.php';
     use Stakeholder\Mahasiswa\Mahasiswa;
 
+    checkLogin();
     $mahasiswa = new Mahasiswa();
     $halamanAktif = $_GET['halaman'] ?? 1;
     $rows = $mahasiswa->allWithPagination($halamanAktif);
     $jumlahHalaman = $rows[0]['jumlahHalaman'];
-
+    
 ?>
 
 <!DOCTYPE HTML>

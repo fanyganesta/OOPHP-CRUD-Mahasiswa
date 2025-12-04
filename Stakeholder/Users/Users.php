@@ -33,4 +33,29 @@
             return $result;
         }
 
+
+        public function login($request){
+            $username = $request['username'];
+            $password = $request['password'];
+            $columns = "nama = ? || email = ?";
+            $paramType = 'ss';
+            $param = [$username, $username];
+            $result = $this->db->customFind($this->table, $columns, $paramType, $param);
+            $this->redirectFailedLogin($result);
+            $dbPassword = $result[0]['password'];
+            $checkPassword = password_verify($password, $dbPassword);
+            $this->redirectFailedLogin($checkPassword);
+            session_start();
+            $_SESSION['users'] = $result;
+            return true;
+        }
+
+        
+        function redirectFailedLogin($datas){
+            if(!$datas){
+                header("Location: login.php?error=Username atau Password salah");
+                exit;
+            }
+        }
+
     }

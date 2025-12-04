@@ -90,12 +90,10 @@
             ";
 
             $result = $this->bindParam($str, $paramType, $param);
-            $result = $this->fetchData($result);
             $datasFind = count($result);
             $jumlahHalaman = ceil($datasFind/$limit);
             $str = $str."LIMIT $index, $limit";
-            $result = $this->bindParam($str, $paramType, $param);
-            $rows = $this->fetchData($result);
+            $rows = $this->bindParam($str, $paramType, $param);
             $result = [];
             foreach($rows as $row){
                 $row += ['jumlahHalaman' => $jumlahHalaman, 'halamanAktif' => $halamanAktif];
@@ -132,7 +130,17 @@
             $prepQuery->bind_param("$paramType", ...$param);
             $result = $prepQuery->execute();
             $type = explode(' ', $str)[0];
-            ($type == 'SELECT') ? $result = $prepQuery->get_result() : null;
+            if($type == 'SELECT'){
+                $result = $prepQuery->get_result();
+                $result = $this->fetchData($result);
+            }
+            return $result;
+        }
+
+
+        public function customFind($table, $columns, $paramType, $param){
+            $str = "SELECT * FROM $table WHERE $columns";
+            $result = $this->bindParam($str, $paramType, $param);
             return $result;
         }
     }

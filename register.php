@@ -5,6 +5,13 @@
     if(isset($_POST['btn-submit'])){
         $user = new Users();
         $result = $user->register($_POST);
+        if(!$result){
+            header("Location: register.php?error=Gagal mendaftar, coba lagi!");
+            exit;
+        }else{
+            header("Location: login.php?message=Berhasil mendaftar, silahkan login");
+            exit;
+        }
     }
 ?>
 

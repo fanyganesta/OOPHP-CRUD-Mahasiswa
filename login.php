@@ -1,14 +1,21 @@
 <?php
 /*
-    login berurusan dengan user
-    1. User memiliki data
-        a. nama
-        c. password
-        d. email
-        e. telepon
-        f. role
+        b. bisa login
+        c. bisa edit data profile
+        d. bisa hapus data profile
+        
 */
+    require 'autoload.php';
+    use Stakeholder\Users\Users;
 
+    if(isset($_POST['btn-login'])){
+        $user = new Users();
+        $result = $user->login($_POST);
+        if($result){
+            header("Location: index.php?message=Anda berhasil login");
+            exit;
+        }
+    }
 ?>
 
 <!DOCTYPE HTML>
