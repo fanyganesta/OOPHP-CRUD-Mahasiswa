@@ -67,4 +67,8 @@
             return $this->db->getByID($this->table, $data);
         }
 
+        public function getAll(){
+            return $result = $this->db->getAll($this->table);
+        }
+
     }

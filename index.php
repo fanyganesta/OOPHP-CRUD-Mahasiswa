@@ -20,8 +20,13 @@
     <?php require 'Components/infoFeedback.php'?>
     <h3> Selamat datang</h3>
     <?php if($_SESSION['users'][0]['role'] == 'admin') : ?>
-        <a href="tambah.php"> Tambah data</a>
-        <p style="display: inline">|</p>
+        <p style="display: inline">
+            <a href="tambah.php"> Tambah data</a>
+            |
+            <a href="akun.php">Manage Akun</a>
+            |
+        </p>
+        
     <?php endif ?>
     <a href="logout.php">Keluar</a>
     <br> <br>
