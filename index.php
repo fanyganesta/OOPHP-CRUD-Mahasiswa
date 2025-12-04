@@ -19,8 +19,10 @@
 <body> 
     <?php require 'Components/infoFeedback.php'?>
     <h3> Selamat datang</h3>
-    <a href="tambah.php"> Tambah data</a>
-    <p style="display: inline">|</p>
+    <?php if($_SESSION['users'][0]['role'] == 'admin') : ?>
+        <a href="tambah.php"> Tambah data</a>
+        <p style="display: inline">|</p>
+    <?php endif ?>
     <a href="logout.php">Keluar</a>
     <br> <br>
     <?php require 'Components/cari.php'?>
@@ -40,7 +42,9 @@
                 <th>Telepon</th>
                 <th>Tanggal Lahir</th>
                 <th>Alamat</th>
-                <th>Action</th>
+                <?php if($_SESSION['users'][0]['role'] == 'admin') : ?>
+                    <th>Action</th>
+                <?php endif ?>
             </tr>
             <?php $i = 1; foreach($rows as $row) : ?>
                 <tr>
@@ -54,10 +58,13 @@
                     <td class="ct"><?= $row['telepon']?></td>
                     <td class="ct"><?= $row['tanggalLahir'] ?></td>
                     <td class="ct"><?= $row['alamat']?></td>
-                    <td class="ct">
-                        <a href="edit.php?ID=<?= $row['ID']?>">Edit</a>
-                        <p style="display:inline"> | </p>
-                        <a href="hapus.php?ID=<?= $row['ID']?>" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                    <?php if($_SESSION['users'][0]['role'] == 'admin') : ?>
+                        <td class="ct">
+                            <a href="edit.php?ID=<?= $row['ID']?>">Edit</a>
+                            <p style="display:inline"> | </p>
+                            <a href="hapus.php?ID=<?= $row['ID']?>" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                        </td>
+                    <?php endif ?>
                 </tr>
             <?php $i++; endforeach ?>
             <?php require 'Components/pagination.php'?>

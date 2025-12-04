@@ -39,6 +39,7 @@
             $password = $request['password'];
             $columns = "nama = ? || email = ?";
             $paramType = 'ss';
+            $rememberme = $request['rememberme'] ?? null;
             $param = [$username, $username];
             $result = $this->db->customFind($this->table, $columns, $paramType, $param);
             $this->redirectFailedLogin($result);
@@ -46,6 +47,10 @@
             $checkPassword = password_verify($password, $dbPassword);
             $this->redirectFailedLogin($checkPassword);
             session_start();
+            if($rememberme){
+                setcookie('key', $result[0]['ID'], time() + 3600);
+                setcookie('token', $dbPassword, time()+3600);
+            }
             $_SESSION['users'] = $result;
             return true;
         }
@@ -56,6 +61,10 @@
                 header("Location: login.php?error=Username atau Password salah");
                 exit;
             }
+        }
+
+        public function getByID($data){
+            return $this->db->getByID($this->table, $data);
         }
 
     }

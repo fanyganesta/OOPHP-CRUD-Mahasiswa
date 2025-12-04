@@ -37,7 +37,7 @@
             
             $prepQuery->execute();
             $result = $prepQuery->get_result();
-            return $result->fetch_assoc();
+            return $this->fetchData($result);
         }
 
         public function insert($table, $dbColumns, $param, $paramType, $datas){
