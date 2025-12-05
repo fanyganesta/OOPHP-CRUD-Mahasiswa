@@ -2,6 +2,9 @@
     require 'autoload.php';
     use Stakeholder\Users\Users;
 
+    checkLogin();
+    checkRole($_SESSION['users'][0]['role']);
+        
     $users = new Users;
     $data = $users->getByID($_GET['ID'])[0];
 ?>

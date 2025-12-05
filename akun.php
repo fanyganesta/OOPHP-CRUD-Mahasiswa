@@ -1,11 +1,9 @@
 <?php 
     require 'autoload.php';
+    checkLogin();
+    checkRole($_SESSION['users'][0]['role']);
     $users = new Stakeholder\Users\Users;
     $rows = $users->getAll();
-
-    if(isset($_POST['btn-newPassword'])){
-        
-    }
 ?>
 
 
