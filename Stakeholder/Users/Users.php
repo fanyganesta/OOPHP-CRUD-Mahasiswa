@@ -71,4 +71,35 @@
             return $result = $this->db->getAll($this->table);
         }
 
+        public function update($datas){
+            $ID = $datas['ID'];
+            $nama = $datas['nama'];
+            $email = $datas['email'];
+            $telepon = $datas['telepon'];
+            $newPassword = $datas['newPassword'];
+            $konfirmasiPassword = $datas['konfirmasiPassword'];
+            $dbPassword = $datas['dbPassword'];
+            $role = $datas['role'];
+
+            if($newPassword != ''){
+                if($newPassword != $konfirmasiPassword){
+                    redirect('editUser.php', "ID=$ID&error=Gagal update data! Password baru tidak sama");
+                }else{
+                    $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
+                    $dbPassword = $newPasswordHashed;
+                }
+            }
+
+            $columns = "nama = ?, email = ?, telepon = ?, password = ?, role = ?";
+            $paramType = "sssss";
+            $param = [$nama, $email, $telepon, $dbPassword, $role];
+
+            $result = $this->db->update($this->table, $columns, $ID, $paramType, $param);
+            if(!$result){
+                redirect('editUser.php', "ID=$ID&error=Gagal rubah data!");
+            }else{
+                redirect('editUser.php', "ID=$ID&message=Berhasil rubah data!");
+            }
+        }
+
     }

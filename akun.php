@@ -16,6 +16,8 @@
 <body>
     <?php require 'Components/infoFeedback.php'?>
     <h3> List akun yang terdaftar </h3>
+    <a href="index.php"> Kembali ke beranda </a>
+    <br>
     <br>
     <table class="br">
         <tr>

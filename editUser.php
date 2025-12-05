@@ -4,9 +4,13 @@
 
     checkLogin();
     checkRole($_SESSION['users'][0]['role']);
-        
+
     $users = new Users;
     $data = $users->getByID($_GET['ID'])[0];
+
+    if(isset($_POST['btn-updateUsers'])){
+        $result = $users->update($_POST);
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -18,7 +22,11 @@
 <body>
     <?php require 'Components/infoFeedback.php'?>
     <h3>Ubah data user, <?=$data['nama']?></h3>
-    <form action="?ID=<?=$j?>" method="POST">
+    <a href="akun.php">Kembali ke list akun</a>
+    <br><br>
+    <form action="" method="POST">
+        <input type="hidden" name="ID" value="<?=$data['ID']?>">
+        <input type="hidden" name="dbPassword" value="<?=$data['password']?>">
         <table>
             <tr>
                 <td><label for="nama">Nama</label></td>
@@ -46,7 +54,7 @@
             </tr>
             <tr>
                 <td colspan="2" class="ct">
-                    <button type="submit" name="btn-newPassword">Ubah</button>
+                    <button type="submit" name="btn-updateUsers">Ubah</button>
                 </td>
             </tr>
         </table>
