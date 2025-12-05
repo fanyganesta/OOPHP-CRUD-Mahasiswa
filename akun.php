@@ -37,7 +37,7 @@
                     <p style="display:inline">
                         <a href="editUser.php?ID=<?=$row['ID']?>">Edit</a>
                         |
-                        <a href="hapusUsers.php" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                        <a href="hapusUser.php?ID=<?=$row['ID']?>" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                     </p>
                 </td>
             </tr>

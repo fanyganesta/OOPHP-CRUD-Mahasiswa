@@ -102,4 +102,12 @@
             }
         }
 
+
+        public function hapus($ID){
+            $result = $this->db->delete($this->table, $ID);
+            (!$result) ?
+            redirect('akun.php', 'error=Gagal hapus data, hubungi admin!') :
+            redirect('akun.php', 'message=Berhasil hapus data!');
+        }
+
     }

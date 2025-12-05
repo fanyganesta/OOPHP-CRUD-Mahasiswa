@@ -54,7 +54,7 @@
             </tr>
             <tr>
                 <td colspan="2" class="ct">
-                    <button type="submit" name="btn-updateUsers">Ubah</button>
+                    <button type="submit" name="btn-updateUsers" onclick="return confirm('Yakin ingin merubah data')">Ubah</button>
                 </td>
             </tr>
         </table>
